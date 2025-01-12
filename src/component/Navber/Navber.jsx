@@ -8,7 +8,15 @@ const navber = <>
 <li><NavLink to="/register">Register</NavLink></li>
 </>
 const Navber = () => {
-  const {user} = useContext(AuthContext);
+  const {user,logOut} = useContext(AuthContext);
+
+  const handleLogOut = () =>{
+    logOut()
+    .then(() =>{console.log("log out done");})
+    .catch(error =>{
+      console.error(error);
+    })
+  }
     return (
         <div>
             <div className="navbar bg-base-100 max-w-6xl mx-auto">
@@ -44,7 +52,7 @@ const Navber = () => {
   <div className="navbar-end">
     {
       user ? <div>
-       <span className="mr-2">{user.email}</span> <a className="btn btn-sm">Sign Out</a>
+       <span className="mr-2">{user.email}</span> <a onClick={handleLogOut} className="btn btn-sm">Sign Out</a>
        </div> :
        <div><a className="btn btn-sm">Sign In</a></div>  
     }
